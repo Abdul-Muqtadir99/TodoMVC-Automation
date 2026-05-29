@@ -29,10 +29,7 @@ public class TodoMvcTest {
     void CanAddTodoItem() {
         TodoMvcPOM reactPage = new TodoMvcPOM(driver);
         reactPage.navigate();
-        WebElement inputBox = driver.findElement(By.id("todo-input"));
-        inputBox.click();
-        inputBox.sendKeys("Buy Milk");
-        inputBox.sendKeys(Keys.ENTER);
+        reactPage.addItem("Buy Milk");
 
         WebElement TodoItem = driver.findElement(By.cssSelector("[data-testid='todo-item-label']"));
         assertEquals("Buy Milk", TodoItem.getText());
@@ -42,16 +39,9 @@ public class TodoMvcTest {
     void CanAddMultipleTodoItem() {
         TodoMvcPOM reactPage = new TodoMvcPOM(driver);
         reactPage.navigate();
-//        driver.get("https://todomvc.com/examples/react/dist/");
-        WebElement inputBox = driver.findElement(By.id("todo-input"));
-        inputBox.click();
-        inputBox.sendKeys("Buy Milk");
-        inputBox.sendKeys(Keys.ENTER);
-        inputBox.sendKeys("Buy Bread");
-        inputBox.sendKeys(Keys.ENTER);
-        inputBox.sendKeys("Buy Eggs");
-        inputBox.sendKeys(Keys.ENTER);
-
+        reactPage.addItem("Buy Milk");
+        reactPage.addItem("Buy Bread");
+        reactPage.addItem("Buy Eggs");
         List<WebElement> TodoItems = driver.findElements(By.cssSelector(".todo-list li"));
         assertEquals(3, TodoItems.size());
     }
@@ -60,14 +50,9 @@ public class TodoMvcTest {
     void CanMarkAllTodoItemsAsComplete() {
         TodoMvcPOM reactPage = new TodoMvcPOM(driver);
         reactPage.navigate();
-        WebElement inputBox = driver.findElement(By.id("todo-input"));
-        inputBox.click();
-        inputBox.sendKeys("Buy Milk");
-        inputBox.sendKeys(Keys.ENTER);
-        inputBox.sendKeys("Buy Bread");
-        inputBox.sendKeys(Keys.ENTER);
-        inputBox.sendKeys("Buy Eggs");
-        inputBox.sendKeys(Keys.ENTER);
+        reactPage.addItem("Buy Milk");
+        reactPage.addItem("Buy Bread");
+        reactPage.addItem("Buy Eggs");
 
         WebElement ToggleAllButton = driver.findElement(By.id("toggle-all"));
         ToggleAllButton.click();
@@ -85,14 +70,9 @@ public class TodoMvcTest {
     void CanMarkAllTodoItemsAsIncomplete() throws InterruptedException {
         TodoMvcPOM reactPage = new TodoMvcPOM(driver);
         reactPage.navigate();
-        WebElement inputBox = driver.findElement(By.id("todo-input"));
-        inputBox.click();
-        inputBox.sendKeys("Buy Milk");
-        inputBox.sendKeys(Keys.ENTER);
-        inputBox.sendKeys("Buy Bread");
-        inputBox.sendKeys(Keys.ENTER);
-        inputBox.sendKeys("Buy Eggs");
-        inputBox.sendKeys(Keys.ENTER);
+        reactPage.addItem("Buy Milk");
+        reactPage.addItem("Buy Bread");
+        reactPage.addItem("Buy Eggs");
 
         WebElement ToggleAllButton = driver.findElement(By.id("toggle-all"));
         ToggleAllButton.click();
@@ -112,14 +92,9 @@ public class TodoMvcTest {
     void CanClearAllCompletedTodoItems() {
         TodoMvcPOM reactPage = new TodoMvcPOM(driver);
         reactPage.navigate();
-        WebElement inputBox = driver.findElement(By.id("todo-input"));
-        inputBox.click();
-        inputBox.sendKeys("Buy Milk");
-        inputBox.sendKeys(Keys.ENTER);
-        inputBox.sendKeys("Buy Bread");
-        inputBox.sendKeys(Keys.ENTER);
-        inputBox.sendKeys("Buy Eggs");
-        inputBox.sendKeys(Keys.ENTER);
+        reactPage.addItem("Buy Milk");
+        reactPage.addItem("Buy Bread");
+        reactPage.addItem("Buy Eggs");
 
         WebElement ToggleAllButton = driver.findElement(By.id("toggle-all"));
         ToggleAllButton.click();
