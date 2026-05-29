@@ -77,7 +77,7 @@ public class TodoMvcTest {
     }
 
     @Test
-    void CanClearAllCompletedTodoItems() throws InterruptedException {
+    void CanMarkAllTodoItemsAsIncomplete() throws InterruptedException {
         driver.get("https://todomvc.com/examples/react/dist/");
         WebElement inputBox = driver.findElement(By.id("todo-input"));
         inputBox.click();
@@ -100,6 +100,29 @@ public class TodoMvcTest {
         for (WebElement checkbox : TodoCheckboxes) {
             assertFalse(checkbox.isSelected());
         }
+    }
+
+    @Test
+    void CanClearAllCompletedTodoItems() {
+        driver.get("https://todomvc.com/examples/react/dist/");
+        WebElement inputBox = driver.findElement(By.id("todo-input"));
+        inputBox.click();
+        inputBox.sendKeys("Buy Milk");
+        inputBox.sendKeys(Keys.ENTER);
+        inputBox.sendKeys("Buy Bread");
+        inputBox.sendKeys(Keys.ENTER);
+        inputBox.sendKeys("Buy Eggs");
+        inputBox.sendKeys(Keys.ENTER);
+
+        WebElement ToggleAllButton = driver.findElement(By.id("toggle-all"));
+        ToggleAllButton.click();
+
+        WebElement ClearAllButton = driver.findElement(By.cssSelector(".clear-completed"));
+        ClearAllButton.click();
+
+        List<WebElement> TodoCheckboxes = driver.findElements(
+                By.cssSelector("[data-testid='todo-item-toggle']"));
+        assertEquals(0,TodoCheckboxes.size());
     }
 
     @AfterAll
