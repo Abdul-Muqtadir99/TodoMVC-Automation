@@ -20,13 +20,13 @@ public class TodoMvcTest {
 
     @Test
     void shouldOpenTodoMvcReact() throws Exception {
-        driver.get("https://todomvc.com/examples/react/dist/");
+        driver.navigate();
         assertEquals("TodoMVC: React", driver.getTitle());
     }
 
     @Test
     void CanAddTodoItem() {
-        driver.get("https://todomvc.com/examples/react/dist/");
+        driver.navigate();
         WebElement inputBox = driver.findElement(By.id("todo-input"));
         inputBox.click();
         inputBox.sendKeys("Buy Milk");
@@ -38,7 +38,7 @@ public class TodoMvcTest {
 
     @Test
     void CanAddMultipleTodoItem() {
-        driver.get("https://todomvc.com/examples/react/dist/");
+        driver.navigate();
         WebElement inputBox = driver.findElement(By.id("todo-input"));
         inputBox.click();
         inputBox.sendKeys("Buy Milk");
@@ -54,7 +54,7 @@ public class TodoMvcTest {
 
     @Test
     void CanMarkAllTodoItemsAsComplete() {
-        driver.get("https://todomvc.com/examples/react/dist/");
+        driver.navigate();
         WebElement inputBox = driver.findElement(By.id("todo-input"));
         inputBox.click();
         inputBox.sendKeys("Buy Milk");
@@ -78,7 +78,7 @@ public class TodoMvcTest {
 
     @Test
     void CanMarkAllTodoItemsAsIncomplete() throws InterruptedException {
-        driver.get("https://todomvc.com/examples/react/dist/");
+        driver.navigate();
         WebElement inputBox = driver.findElement(By.id("todo-input"));
         inputBox.click();
         inputBox.sendKeys("Buy Milk");
@@ -104,7 +104,7 @@ public class TodoMvcTest {
 
     @Test
     void CanClearAllCompletedTodoItems() {
-        driver.get("https://todomvc.com/examples/react/dist/");
+        driver.navigate();
         WebElement inputBox = driver.findElement(By.id("todo-input"));
         inputBox.click();
         inputBox.sendKeys("Buy Milk");
