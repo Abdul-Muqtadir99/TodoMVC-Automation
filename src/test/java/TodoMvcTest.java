@@ -20,13 +20,15 @@ public class TodoMvcTest {
 
     @Test
     void shouldOpenTodoMvcReact() throws Exception {
-        driver.navigate();
+        TodoMvcPOM reactPage = new TodoMvcPOM(driver);
+        reactPage.navigate();
         assertEquals("TodoMVC: React", driver.getTitle());
     }
 
     @Test
     void CanAddTodoItem() {
-        driver.navigate();
+        TodoMvcPOM reactPage = new TodoMvcPOM(driver);
+        reactPage.navigate();
         WebElement inputBox = driver.findElement(By.id("todo-input"));
         inputBox.click();
         inputBox.sendKeys("Buy Milk");
@@ -38,7 +40,9 @@ public class TodoMvcTest {
 
     @Test
     void CanAddMultipleTodoItem() {
-        driver.navigate();
+        TodoMvcPOM reactPage = new TodoMvcPOM(driver);
+        reactPage.navigate();
+//        driver.get("https://todomvc.com/examples/react/dist/");
         WebElement inputBox = driver.findElement(By.id("todo-input"));
         inputBox.click();
         inputBox.sendKeys("Buy Milk");
@@ -54,7 +58,8 @@ public class TodoMvcTest {
 
     @Test
     void CanMarkAllTodoItemsAsComplete() {
-        driver.navigate();
+        TodoMvcPOM reactPage = new TodoMvcPOM(driver);
+        reactPage.navigate();
         WebElement inputBox = driver.findElement(By.id("todo-input"));
         inputBox.click();
         inputBox.sendKeys("Buy Milk");
@@ -78,7 +83,8 @@ public class TodoMvcTest {
 
     @Test
     void CanMarkAllTodoItemsAsIncomplete() throws InterruptedException {
-        driver.navigate();
+        TodoMvcPOM reactPage = new TodoMvcPOM(driver);
+        reactPage.navigate();
         WebElement inputBox = driver.findElement(By.id("todo-input"));
         inputBox.click();
         inputBox.sendKeys("Buy Milk");
@@ -95,7 +101,7 @@ public class TodoMvcTest {
 
         List<WebElement> TodoCheckboxes = driver.findElements(
                 By.cssSelector("[data-testid='todo-item-toggle']"));
-        assertEquals(3,TodoCheckboxes.size());
+        assertEquals(3, TodoCheckboxes.size());
 
         for (WebElement checkbox : TodoCheckboxes) {
             assertFalse(checkbox.isSelected());
@@ -104,7 +110,8 @@ public class TodoMvcTest {
 
     @Test
     void CanClearAllCompletedTodoItems() {
-        driver.navigate();
+        TodoMvcPOM reactPage = new TodoMvcPOM(driver);
+        reactPage.navigate();
         WebElement inputBox = driver.findElement(By.id("todo-input"));
         inputBox.click();
         inputBox.sendKeys("Buy Milk");
@@ -122,12 +129,12 @@ public class TodoMvcTest {
 
         List<WebElement> TodoCheckboxes = driver.findElements(
                 By.cssSelector("[data-testid='todo-item-toggle']"));
-        assertEquals(0,TodoCheckboxes.size());
+        assertEquals(0, TodoCheckboxes.size());
     }
 
     @AfterAll
     static void closeBrowser() {
         driver.quit();
-    }
 
+    }
 }

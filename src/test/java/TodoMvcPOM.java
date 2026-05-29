@@ -15,6 +15,6 @@ public class TodoMvcPOM {
     }
 
     public void navigate() {
-        driver.get("https://todomvc.com/examples/react/dist/#/");
+        driver.get("https://todomvc.com/examples/react/dist/");
     }
 }
