@@ -53,12 +53,9 @@ public class TodoMvcTest {
         reactPage.addItem("Buy Milk");
         reactPage.addItem("Buy Bread");
         reactPage.addItem("Buy Eggs");
+        reactPage.ToggleAll();
+        List<WebElement> TodoCheckboxes = reactPage.getTodoCheckboxes();
 
-        WebElement ToggleAllButton = driver.findElement(By.id("toggle-all"));
-        ToggleAllButton.click();
-
-        List<WebElement> TodoCheckboxes = driver.findElements(
-                By.cssSelector("[data-testid='todo-item-toggle']"));
         assertEquals(3, TodoCheckboxes.size());
 
         for (WebElement checkbox : TodoCheckboxes) {
@@ -73,21 +70,16 @@ public class TodoMvcTest {
         reactPage.addItem("Buy Milk");
         reactPage.addItem("Buy Bread");
         reactPage.addItem("Buy Eggs");
+        reactPage.ToggleAll();
+        reactPage.ToggleAll();
+        List<WebElement> TodoCheckboxes = reactPage.getTodoCheckboxes();
 
-        WebElement ToggleAllButton = driver.findElement(By.id("toggle-all"));
-        ToggleAllButton.click();
-        Thread.sleep(1000);
-        ToggleAllButton.click();
-
-        List<WebElement> TodoCheckboxes = driver.findElements(
-                By.cssSelector("[data-testid='todo-item-toggle']"));
         assertEquals(3, TodoCheckboxes.size());
 
         for (WebElement checkbox : TodoCheckboxes) {
             assertFalse(checkbox.isSelected());
         }
     }
-
     @Test
     void CanClearAllCompletedTodoItems() {
         TodoMvcPOM reactPage = new TodoMvcPOM(driver);
@@ -95,15 +87,11 @@ public class TodoMvcTest {
         reactPage.addItem("Buy Milk");
         reactPage.addItem("Buy Bread");
         reactPage.addItem("Buy Eggs");
+        reactPage.ToggleAll();
+        reactPage.ClearAllCompleted();
 
-        WebElement ToggleAllButton = driver.findElement(By.id("toggle-all"));
-        ToggleAllButton.click();
+        List<WebElement> TodoCheckboxes = reactPage.getTodoCheckboxes();
 
-        WebElement ClearAllButton = driver.findElement(By.cssSelector(".clear-completed"));
-        ClearAllButton.click();
-
-        List<WebElement> TodoCheckboxes = driver.findElements(
-                By.cssSelector("[data-testid='todo-item-toggle']"));
         assertEquals(0, TodoCheckboxes.size());
     }
 

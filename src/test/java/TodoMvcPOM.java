@@ -7,10 +7,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TodoMvcPOM {
     public WebDriver driver;
 
-    
+    private By Checkboxes = By.cssSelector("[data-testid='todo-item-toggle']");
+    private By ToggleAll = By.id("toggle-all");
 
     public TodoMvcPOM(WebDriver driver) {
         this.driver = driver;
@@ -26,4 +29,20 @@ public class TodoMvcPOM {
         addTodoItem.sendKeys(TodoItem);
         addTodoItem.sendKeys(Keys.ENTER);
     }
+
+    public void ToggleAll(){
+        WebElement ToggleAllButton = driver.findElement(ToggleAll);
+        ToggleAllButton.click();
+    }
+
+    public void ClearAllCompleted(){
+        WebElement ClearAllButton = driver.findElement(By.cssSelector(".clear-completed"));
+        ClearAllButton.click();
+    }
+
+    public List<WebElement> getTodoCheckboxes() {
+        return driver.findElements(Checkboxes);
+    }
+
+
 }
