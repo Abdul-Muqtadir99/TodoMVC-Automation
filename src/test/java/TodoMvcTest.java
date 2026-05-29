@@ -50,6 +50,27 @@ public class TodoMvcTest {
 
         List<WebElement> TodoItems = driver.findElements(By.cssSelector(".todo-list li"));
         assertEquals(3, TodoItems.size());
+    }
+
+    @Test
+    void CanMarkAllTodoItemsAsComplete() {
+        driver.get("https://todomvc.com/examples/react/dist/");
+        WebElement inputBox = driver.findElement(By.id("todo-input"));
+        inputBox.click();
+        inputBox.sendKeys("Buy Milk");
+        inputBox.sendKeys(Keys.ENTER);
+        inputBox.sendKeys("Buy Bread");
+        inputBox.sendKeys(Keys.ENTER);
+        inputBox.sendKeys("Buy Eggs");
+        inputBox.sendKeys(Keys.ENTER);
+
+        WebElement ToggleAllButton = driver.findElement(By.id("toggle-all"));
+        ToggleAllButton.click();
+
+        List<WebElement> TodoCheckboxes = driver.findElements(
+                By.cssSelector("[data-testid='todo-item-toggle']"));
+        assertEquals(3,TodoCheckboxes.size());
+
 
     }
 
