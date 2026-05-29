@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TodoMvcTest {
     private static ChromeDriver driver;
@@ -69,10 +70,15 @@ public class TodoMvcTest {
 
         List<WebElement> TodoCheckboxes = driver.findElements(
                 By.cssSelector("[data-testid='todo-item-toggle']"));
-        assertEquals(3,TodoCheckboxes.size());
+        assertEquals(3, TodoCheckboxes.size());
 
-
+        for (WebElement checkbox : TodoCheckboxes) {
+            assertTrue(checkbox.isSelected());
+        }
     }
+
+
+    
 
     @AfterAll
     static void closeBrowser() {
