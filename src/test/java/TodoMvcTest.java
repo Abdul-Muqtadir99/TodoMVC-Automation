@@ -8,8 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.File;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TodoMvcTest {
     private static ChromeDriver driver;
@@ -77,8 +76,31 @@ public class TodoMvcTest {
         }
     }
 
+    @Test
+    void CanClearAllCompletedTodoItems() throws InterruptedException {
+        driver.get("https://todomvc.com/examples/react/dist/");
+        WebElement inputBox = driver.findElement(By.id("todo-input"));
+        inputBox.click();
+        inputBox.sendKeys("Buy Milk");
+        inputBox.sendKeys(Keys.ENTER);
+        inputBox.sendKeys("Buy Bread");
+        inputBox.sendKeys(Keys.ENTER);
+        inputBox.sendKeys("Buy Eggs");
+        inputBox.sendKeys(Keys.ENTER);
 
-    
+        WebElement ToggleAllButton = driver.findElement(By.id("toggle-all"));
+        ToggleAllButton.click();
+        Thread.sleep(1000);
+        ToggleAllButton.click();
+
+        List<WebElement> TodoCheckboxes = driver.findElements(
+                By.cssSelector("[data-testid='todo-item-toggle']"));
+        assertEquals(3,TodoCheckboxes.size());
+
+        for (WebElement checkbox : TodoCheckboxes) {
+            assertFalse(checkbox.isSelected());
+        }
+    }
 
     @AfterAll
     static void closeBrowser() {
