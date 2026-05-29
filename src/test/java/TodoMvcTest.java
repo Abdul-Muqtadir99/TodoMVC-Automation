@@ -36,7 +36,22 @@ public class TodoMvcTest {
         assertEquals("Buy Milk", TodoItem.getText());
     }
 
- 
+    @Test
+    void CanAddMultipleTodoItem() {
+        driver.get("https://todomvc.com/examples/react/dist/");
+        WebElement inputBox = driver.findElement(By.id("todo-input"));
+        inputBox.click();
+        inputBox.sendKeys("Buy Milk");
+        inputBox.sendKeys(Keys.ENTER);
+        inputBox.sendKeys("Buy Bread");
+        inputBox.sendKeys(Keys.ENTER);
+        inputBox.sendKeys("Buy Eggs");
+        inputBox.sendKeys(Keys.ENTER);
+
+        List<WebElement> TodoItems = driver.findElements(By.cssSelector(".todo-list li"));
+        assertEquals(3, TodoItems.size());
+
+    }
 
     @AfterAll
     static void closeBrowser() {
